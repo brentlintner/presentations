@@ -1,0 +1,17 @@
+{
+  "name": "web_components",
+  "version": "0.0.1",
+  "homepage": "https://github.com/brentlintner/presentations",
+  "authors": [
+    "Brent Lintner <brent.lintner@gmail.com>"
+  ],
+  "description": "Examples of web components and polyfill frameworks.",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "zepto": "~1.1.4",
+    "jquery": "~2.1.1",
+    "polymer-polymer": "~0.3.5",
+    "x-tag-core": "~0.9.7"
+  }
+}

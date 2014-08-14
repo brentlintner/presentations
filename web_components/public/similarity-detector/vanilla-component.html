@@ -1,0 +1,58 @@
+<html>
+  <script src="/jquery/dist/jquery.min.js"></script>
+
+  <template id="sd-template">
+    <style>
+      .variant {
+        position: absolute;
+        top: 0;
+        left: 400px;
+      }
+    </style>
+
+    <div class="variant">
+      <h1>Variant</h1>
+      <textarea id="variant" rows="8" cols="40"></textarea>
+    </div>
+    <div class="code">
+      <h1>Code</h1>
+      <textarea id="code" rows="8" cols="40"></textarea>
+    </div>
+    <button id="calculate">calculate!</button>
+    <p id="result"></p>
+  </template>
+
+  <script>
+    var
+      import_document = document.currentScript.ownerDocument,
+      el = Object.create(HTMLElement.prototype);
+
+    el.createdCallback = function () {
+      var shadow = this.createShadowRoot();
+      var template = import_document.querySelector('#sd-template');
+
+      shadow.appendChild(template.content.cloneNode(true));
+
+      shadow
+        .querySelector("#calculate")
+        .addEventListener("click", function () {
+          $.ajax('/detect', {
+            type: 'POST',
+            data: {
+              code: shadow.querySelector("#code").value,
+              variant: shadow.querySelector("#variant").value
+            },
+            success: function (data) {
+              shadow.querySelector("#result").innerHTML = data
+              console.log(data)
+            }
+          })
+        })
+
+      console.log('similarity-detector ready!')
+    };
+
+    document.registerElement("similarity-detector",
+                            { prototype: el });
+  </script>
+</html>
